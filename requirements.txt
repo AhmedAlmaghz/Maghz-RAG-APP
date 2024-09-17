@@ -1,0 +1,4 @@
+unstructured[all-deps]
+langchain
+supabase
+python-dotenv

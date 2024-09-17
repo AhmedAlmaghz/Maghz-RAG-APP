@@ -1,0 +1,23 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+body {
+  @apply bg-gray-900 text-white;
+}
+
+.prose {
+  @apply text-gray-300;
+}
+
+.prose a {
+  @apply text-primary-400;
+}
+
+.prose strong {
+  @apply text-white;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+  @apply text-white;
+}
