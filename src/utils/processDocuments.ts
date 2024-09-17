@@ -65,7 +65,7 @@
 
 // export default processDocuments
 
-import dotenv from 'dotenv'
+
 import { readdir } from 'fs/promises'
 import path from 'path'
 import { Document } from 'langchain/document'
@@ -75,7 +75,6 @@ import { Pinecone as PineconeClient } from '@pinecone-database/pinecone'
 import { PineconeStore } from '@langchain/pinecone'
 import { UnstructuredLoader } from '@langchain/community/document_loaders/fs/unstructured'
 
-dotenv.config()
 const processDocuments = async () => {
   try {
     const contentDir = path.join(process.cwd(), 'content')
@@ -87,6 +86,7 @@ const processDocuments = async () => {
 
     const embeddings = new VoyageEmbeddings({
       apiKey: process.env.VOYAGE_API_KEY,
+      inputType: 'document',
       modelName:process.env.VOYAGE_MODEL,
     })
 
@@ -116,7 +116,7 @@ const processDocuments = async () => {
             chunkOverlap: 128,
           })
 
-          const chunks = await textSplitter.splitDocuments(docs)
+          const chunks: Document[] = await textSplitter.splitDocuments(docs)
           console.log(`عدد الأجزاء للملف ${file}:`, chunks.length)
 
           if (chunks.length === 0) {
@@ -126,7 +126,7 @@ const processDocuments = async () => {
           }
 
           // Test embedding a single chunk
-          const testEmbedding = await embeddings.embedQuery(chunks[0].pageContent)
+          const testEmbedding = await embeddings.embedDocuments(chunks[0].pageContent)
           if (!testEmbedding) {
             console.error(`Embedding failed for ${file}. Skipping.`)
             success = true

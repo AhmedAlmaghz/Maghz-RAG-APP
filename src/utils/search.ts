@@ -18,25 +18,27 @@
 
 // export default search
 
-import dotenv from 'dotenv'
+
 import { VoyageEmbeddings } from "@langchain/community/embeddings/voyage";
 import { PineconeStore } from '@langchain/pinecone'
 import { Pinecone as PineconeClient } from '@pinecone-database/pinecone'
 
-dotenv.config()
 
 const search = async (query: string) => {
 
   const embeddings = new VoyageEmbeddings({
-    apiKey: process.env.VOYAGE_API_KEY,
+    apiKey: "pa-_HBc1oHXIWTqi134SnjX1jAQUHniKQeAkK4CLZj1OE8",
+    // apiKey: process.env.VOYAGE_API_KEY,
     modelName:process.env.VOYAGE_MODEL,
   })
 
   const pinecone = new PineconeClient({
-    apiKey: process.env.PINECONE_API_KEY,
+    apiKey: "1a5c754c-5452-4f43-be40-a12373ae3690",
+    // apiKey: process.env.PINECONE_API_KEY,
   })
 
-  const index = pinecone.Index(process.env.PINECONE_INDEX!);
+  // const index = pinecone.Index(process.env.PINECONE_INDEX!);
+  const index = pinecone.Index("sample-movies");
 
   const vectorStore = await PineconeStore.fromExistingIndex(embeddings, {
     pineconeIndex:index,
@@ -46,7 +48,7 @@ const search = async (query: string) => {
     // namespace: "foo",
   });
 
-  const results = await vectorStore.similaritySearch(query, 5)
+  const results = await vectorStore.similaritySearch(query)
   return results
 }
 

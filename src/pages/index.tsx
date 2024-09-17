@@ -11,6 +11,8 @@ import generateResponse from '../utils/generateResponse'
 // import ParticleBackground from '../components/ParticleBackground'
 import dynamic from 'next/dynamic'
 
+import axios from 'axios'
+
 const ParticleBackground = dynamic(() => import('../components/ParticleBackground'), {
   ssr: false,
 })
@@ -25,7 +27,10 @@ export default function Home() {
     setLoading(true)
     setError('')
     try {
-      const searchResults = await search(query)
+      // const searchResults = await search(query)
+      const response = await axios.post('http://localhost:3001/search', { query })
+      const searchResults = response.data
+
       const context = searchResults.map(r => r.pageContent).join('\n\n')
       const generatedResponse = await generateResponse(query, context)
       setResponse(generatedResponse)
