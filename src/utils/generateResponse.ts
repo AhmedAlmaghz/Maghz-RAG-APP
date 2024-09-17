@@ -1,20 +1,21 @@
-import { GoogleGenerativeAI } from '@google/generative-ai'
+import { ChatGoogleGenerativeAI } from '@langchain/google-genai'
 
 const generateResponse = async (query: string, context: string) => {
-  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!)
-  const model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' })
+  const genAI = new ChatGoogleGenerativeAI({
+    apiKey: process.env.GEMINI_API_KEY!,
+    modelName: 'gemini-1.5-pro'
+  })
 
   const prompt = `
-    Context: ${context}
+    السياق: ${context}
     
-    User Query: ${query}
+    استفسار المستخدم: ${query}
     
-    Please provide a detailed response based on the given context and user query. Format the response using Markdown for better readability.
+    يرجى تقديم إجابة مفصلة بناءً على السياق المعطى واستفسار المستخدم. قم بتنسيق الإجابة باستخدام Markdown لتحسين القراءة.
   `
 
-  const result = await model.generateContent(prompt)
-  const response = await result.response
-  return response.text()
+  const result = await genAI.invoke(prompt)
+  return result
 }
 
 export default generateResponse
