@@ -1,6 +1,6 @@
 import { VoyageEmbeddings } from "@langchain/community/embeddings/voyage";
-import { PineconeStore } from '@langchain/pinecone'
-import { Pinecone as PineconeClient } from '@pinecone-database/pinecone'
+// import { PineconeStore } from '@langchain/pinecone'
+import { Pinecone as PineconeClient } from '@pinecone-database/pinecone';
 
 
 const search = async (query: string) => {

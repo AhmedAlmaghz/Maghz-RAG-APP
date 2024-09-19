@@ -1,6 +1,6 @@
 import { readdir } from 'fs/promises'
 import path from 'path'
-import { Document } from 'langchain/document'
+// import { Document } from 'langchain/document'
 import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter'
 import { VoyageEmbeddings } from '@langchain/community/embeddings/voyage'
 import { Pinecone as PineconeClient } from '@pinecone-database/pinecone'

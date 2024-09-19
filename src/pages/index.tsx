@@ -12,7 +12,7 @@ import SearchResults from '../components/SearchResults';
 
 export default function Home() {
   const [response, setResponse] = useState('');
-  const [listSearchResults, setListSearchResults] = useState<any[]>([]);
+  const [listSearchResults, setListSearchResults] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState('');
@@ -67,7 +67,7 @@ export default function Home() {
 
       const results = await res.json();
       setListSearchResults(results);
-      const context = results.map((r: any) => r.pageContent).join('\n\n');
+      const context = results.map((r: string) => r.pageContent).join('\n\n');
       
       if (context.trim()) {
         await handleGenerate(query, context);
