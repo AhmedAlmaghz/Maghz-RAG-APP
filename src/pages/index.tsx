@@ -128,11 +128,7 @@ export default function Home() {
             <SearchBox onSearch={handleSearch} />
           </motion.div>
           
-          <AnimatePresence>
-            {listSearchResults.length > 0 && (
-              <SearchResults results={listSearchResults} />
-            )}
-          </AnimatePresence>
+          
 
           <motion.div
             initial={{ opacity: 0 }}
@@ -180,6 +176,12 @@ export default function Home() {
           <AnimatePresence>
             {response && !loading && (
               <ResponseCard key="response" response={response} />
+            )}
+          </AnimatePresence>
+
+          <AnimatePresence>
+            {listSearchResults.length > 0 && (
+              <SearchResults results={listSearchResults} />
             )}
           </AnimatePresence>
 
