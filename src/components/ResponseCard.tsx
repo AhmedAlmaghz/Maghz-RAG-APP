@@ -13,7 +13,7 @@ export default function ResponseCard({ response }: ResponseCardProps) {
       transition={{ duration: 0.5 }}
       className="bg-gray-800 bg-opacity-50 rounded-lg p-6 shadow-lg"
     >
-      <h2 className="text-2xl font-semibold mb-4 text-primary-300">Response:</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-primary-300">الإستجابة :</h2>
       <div className="prose prose-invert max-w-none">
         <ReactMarkdown>{response}</ReactMarkdown>
       </div>

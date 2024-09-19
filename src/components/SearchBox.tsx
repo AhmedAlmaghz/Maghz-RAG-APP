@@ -1,18 +1,25 @@
-import { useState } from 'react'
-import { SearchIcon } from '@heroicons/react/solid'
-import { motion } from 'framer-motion'
+import { useState } from 'react';
+import { SearchIcon } from '@heroicons/react/solid';
+import { motion } from 'framer-motion';
 
 interface SearchBoxProps {
-  onSearch: (query: string) => void
+  onSearch: (query: string) => void;
 }
 
 export default function SearchBox({ onSearch }: SearchBoxProps) {
-  const [query, setQuery] = useState('')
+  const [query, setQuery] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    onSearch(query)
-  }
+    e.preventDefault();
+
+    // منع البحث إذا كان الإدخال فارغًا
+    if (!query.trim()) {
+      alert('Please enter a search query');
+      return;
+    }
+
+    onSearch(query);
+  };
 
   return (
     <form onSubmit={handleSubmit} className="relative">
@@ -27,10 +34,10 @@ export default function SearchBox({ onSearch }: SearchBoxProps) {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         type="submit"
-        className="absolute right-3 top-3 p-2 bg-primary-500 rounded-full text-white"
+        className="absolute end-3 top-3 p-2 bg-primary-500 rounded-full text-white"
       >
         <SearchIcon className="h-6 w-6" />
       </motion.button>
     </form>
-  )
+  );
 }
